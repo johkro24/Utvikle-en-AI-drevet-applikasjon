@@ -11,7 +11,7 @@ app.use(express.static(path.join('public')));
 
 // OpenAI configuration
 const openai = new OpenAI({
-  apiKey:"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", });
+  apiKey:"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", });
 
 // Endpoint to handle user input and get a response from OpenAI
 app.post("/api/chat", async (req, res) => {
