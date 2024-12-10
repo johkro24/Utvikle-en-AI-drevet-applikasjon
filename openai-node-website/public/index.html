@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenAI Chat</title>
+</head>
+<body>
+    <h1>Chat with OpenAI</h1>
+    <textarea id="prompt" rows="4" cols="50" placeholder="Type your prompt here..."></textarea><br>
+    <button onclick="sendPrompt()">Send</button>
+    <div id="response"></div>
+
+    <script>
+        async function sendPrompt() {
+            const prompt = document.getElementById("prompt").value;
+            const responseDiv = document.getElementById("response");
+
+            try {
+                const res = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt }),
+                });
+                const data = await res.json();
+                responseDiv.innerText = data.choices[0].text;
+            } catch (error) {
+                responseDiv.innerText = "Error: " + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
