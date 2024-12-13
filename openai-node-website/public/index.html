@@ -1,33 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OpenAI Chat</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Chat with OpenAI</h1>
-    <textarea id="prompt" rows="4" cols="50" placeholder="Type your prompt here..."></textarea><br>
+    <textarea
+      id="prompt"
+      rows="4"
+      cols="50"
+      placeholder="Type your prompt here..."
+    ></textarea
+    ><br />
     <button onclick="sendPrompt()">Send</button>
     <div id="response"></div>
 
     <script>
-        async function sendPrompt() {
-            const prompt = document.getElementById("prompt").value;
-            const responseDiv = document.getElementById("response");
+      async function sendPrompt() {
+        const prompt = document.getElementById("prompt").value;
+        const responseDiv = document.getElementById("response");
 
-            try {
-                const res = await fetch('/api/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ prompt }),
-                });
-                const data = await res.json();
-                responseDiv.innerText = data.choices[0].text;
-            } catch (error) {
-                responseDiv.innerText = "Error: " + error.message;
-            }
+        try {
+          const res = await fetch("/api/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ prompt }),
+          });
+          const data = await res.json();
+          responseDiv.innerText = data.choices[0].text;
+        } catch (error) {
+          responseDiv.innerText = "Error: " + error.message;
         }
+      }
     </script>
-</body>
+    <iframe
+      src="https://copilotstudio.microsoft.com/environments/Default-1b6bba49-6f35-4d82-9fca-4827d417cd3e/bots/crc1e_iktBrukerstotte/webchat?__version__=2"
+      frameborder="1"
+      style="width: 50%; height: 600px"
+    ></iframe>
+  </body>
 </html>
